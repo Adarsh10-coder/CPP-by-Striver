@@ -19,7 +19,7 @@ int main(){
             cout<<"YES"<<endl;
         }
         else{
-            cout<<"No"<<endl;
+            cout<<"NO"<<endl;
         }
     }
     return 0;
