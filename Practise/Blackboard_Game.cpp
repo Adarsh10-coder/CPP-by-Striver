@@ -1,24 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        long long n;
-        cin >> n;
-        // input taken
-        
-        if(n<=2 && n>0){
-            cout<<"Alice"<<endl;
+string makeGood(string s){
+        string result = "";
+        int n = s.size();
+        for(int i=0; i<n; i++){
+            if(s[i]>='A' && s[i]<='Z'){
+                s[i] = s[i]+32;
+            }
+            else if(s[i]>='a' && s[i]<='z'){
+                result += s[i];
+            }
         }
-        else if(n%2==0){
-            cout<<"Bobe"<<endl;
-        }
-        else if(n%2==1){
-            cout<<"Alice"<<endl;
-        }
-        
+        return result;
     }
+
+int main() {
+     string front = makeGood("A man, a plan, a canal: Panama");
+        string back ="";
+        for(int i=front.size()-1; i>=0; i--){
+            back.push_back(front[i]);
+        }
+        cout<<back<<endl;
+    
     return 0;
 }
