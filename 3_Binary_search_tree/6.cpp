@@ -10,24 +10,22 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
 };
 
-class Solution {
-public:
-    bool isValidBST(TreeNode* root){
-        return validate(root, LONG_MIN, LONG_MAX);
+bool validate(TreeNode* root, long minVal, long maxVal){
+    if(root == NULL){
+        return true;
     }
+    if(root->data <= minVal || root->data >= maxVal){
+        return false;
+    }
+    return validate(root->left, minVal, root->data) &&
+            validate(root->right, root->data, maxVal);
+}
 
-private:
-    bool validate(TreeNode* root, long minVal, long maxVal){
-        if(root == NULL){
-            return true;
-        }
-        if(root->data <= minVal || root->data >= maxVal){
-            return false;
-        }
-        return validate(root->left, minVal, root->data) &&
-               validate(root->right, root->data, maxVal);
-    }
-};
+bool isValidBST(TreeNode* root){
+    return validate(root, LONG_MIN, LONG_MAX);
+}
+
+
 
 int main() {
     /*
@@ -45,9 +43,7 @@ int main() {
     root->left->right = new TreeNode(4);
     root->right->right = new TreeNode(8);
 
-    Solution obj;
-
-    if (obj.isValidBST(root))
+    if (isValidBST(root))
         cout << "Valid BST" << endl;
     else
         cout << "Not a Valid BST" << endl;
