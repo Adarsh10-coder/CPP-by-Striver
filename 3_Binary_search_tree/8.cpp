@@ -10,16 +10,16 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
 };
 
-TreeNode* build(vector<int>& A, int& i, int bound){
-    if(i == A.size() || A[i] > bound) return NULL;
-    TreeNode* root = new TreeNode(A[i++]);
-    root -> left = build(A, i, root -> data);
-    root -> right = build(A, i, bound);
-    return root;
-}
-TreeNode* bstFromPreorder(vector<int>& A){
-    int i = 0;
-    return build(A, i, INT_MAX);
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == NULL) return NULL;
+        int curr = root -> data;
+        if(curr < p->data && curr < q->data){
+            return lowestCommonAncestor(root -> right, p, q);
+        }
+        if(curr > p->data && curr > q->data){
+            return lowestCommonAncestor(root -> left, p, q);
+        }
+        return root;
 }
 
 int main() {
